@@ -1,7 +1,6 @@
 package rest;
 
 import fingerprint.interactors.FingerprintInteractor;
-import fingerprint.validation.FingerprintValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,8 +14,8 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    @Autowired
     @Bean
+    @Autowired
     public FingerprintInteractor buildService(FingerprintRepositoryImpl repository) {
         return new FingerprintInteractor(repository);
     }
