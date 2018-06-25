@@ -24,7 +24,7 @@ public class FingerprintInteractor {
      */
     public FingerprintInteractor(FingerprintRepository repository) {
         this.repository = repository;
-        this.validator = new FingerprintValidator(4);
+        this.validator = new FingerprintValidator(4, 2);
     }
 
     /**
