@@ -1,11 +1,11 @@
-package fingerprint.interactors;
+package fingerprint.helpers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Base64;
 
-class Encoder {
+public class Encoder {
 
     /**
      * Serializa la matriz de minucias en un string codificado.
@@ -13,7 +13,7 @@ class Encoder {
      * @param matrix la matriz de minucias
      * @return un string codificado en Base64
      */
-    static String serializeFingerprintMatrix(String[] matrix) {
+    public static String serializeFingerprintMatrix(String[] matrix) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {

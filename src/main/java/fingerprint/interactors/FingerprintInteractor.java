@@ -2,6 +2,7 @@ package fingerprint.interactors;
 
 import fingerprint.entities.Fingerprint;
 import fingerprint.entities.VerificationStats;
+import fingerprint.helpers.Encoder;
 import fingerprint.persistence.FingerprintRepository;
 import fingerprint.validation.FingerprintValidator;
 
