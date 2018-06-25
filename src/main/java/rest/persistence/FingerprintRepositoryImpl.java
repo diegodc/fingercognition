@@ -1,7 +1,7 @@
 package rest.persistence;
 
-import fingerprint.entities.Fingerprint;
-import fingerprint.persistence.FingerprintRepository;
+import core.fingerprint.entities.Fingerprint;
+import core.fingerprint.persistence.FingerprintRepository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

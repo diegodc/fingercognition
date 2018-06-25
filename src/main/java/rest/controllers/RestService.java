@@ -1,7 +1,7 @@
 package rest.controllers;
 
-import fingerprint.entities.VerificationStats;
-import fingerprint.interactors.FingerprintInteractor;
+import core.fingerprint.entities.VerificationStats;
+import core.fingerprint.interactors.FingerprintInteractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

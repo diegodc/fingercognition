@@ -1,4 +1,4 @@
-package fingerprint.validation;
+package core.fingerprint.validation;
 
 /**
  * Implementacion del algoritmo de verificacion de matrices de minucias.

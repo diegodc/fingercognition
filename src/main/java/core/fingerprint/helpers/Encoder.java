@@ -1,4 +1,4 @@
-package fingerprint.helpers;
+package core.fingerprint.helpers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

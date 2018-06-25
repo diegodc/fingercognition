@@ -1,4 +1,4 @@
-package fingerprint.entities;
+package core.fingerprint.entities;
 
 /**
  * Estadisticas de la verificacion de huellas. El ratio se calcula como la proporcion

@@ -1,4 +1,4 @@
-package fingerprint.entities;
+package core.fingerprint.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;

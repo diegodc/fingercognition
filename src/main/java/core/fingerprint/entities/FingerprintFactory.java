@@ -1,7 +1,7 @@
-package fingerprint.entities;
+package core.fingerprint.entities;
 
-import fingerprint.helpers.Encoder;
-import fingerprint.validation.FingerprintValidator;
+import core.fingerprint.helpers.Encoder;
+import core.fingerprint.validation.FingerprintValidator;
 
 public class FingerprintFactory {
 

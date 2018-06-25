@@ -1,6 +1,6 @@
-package fingerprint.persistence;
+package core.fingerprint.persistence;
 
-import fingerprint.entities.Fingerprint;
+import core.fingerprint.entities.Fingerprint;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package fingerprint.entities;
+package core.fingerprint.entities;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package fingerprint.validation;
+package core.fingerprint.validation;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
-package fingerprint.interactors;
+package core.fingerprint.interactors;
 
-import fingerprint.entities.Fingerprint;
-import fingerprint.entities.VerificationStats;
-import fingerprint.persistence.FingerprintRepository;
+import core.fingerprint.entities.Fingerprint;
+import core.fingerprint.entities.VerificationStats;
+import core.fingerprint.persistence.FingerprintRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,10 +1,10 @@
-package fingerprint.interactors;
+package core.fingerprint.interactors;
 
-import fingerprint.entities.Fingerprint;
-import fingerprint.entities.FingerprintFactory;
-import fingerprint.entities.VerificationStats;
-import fingerprint.helpers.Encoder;
-import fingerprint.persistence.FingerprintRepository;
+import core.fingerprint.entities.Fingerprint;
+import core.fingerprint.entities.FingerprintFactory;
+import core.fingerprint.entities.VerificationStats;
+import core.fingerprint.helpers.Encoder;
+import core.fingerprint.persistence.FingerprintRepository;
 
 import java.util.Optional;
 
