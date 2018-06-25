@@ -126,6 +126,7 @@ class FingerprintValidatorTest {
         assertFingerprint("CCCCAC TGACTG GCTGAC TGACTG ACGGAC TGAGTG");
         assertFingerprint("ACTGAC TGACTG ATTTTC TGTCGG ATTGAC CGACTG");
         assertFingerprint("ACATAC TGTCTG ATAGAG TGACTG ACTGAG TGACTA");
+        assertFingerprint("ACTGAC TGACTG AAAAAC TGACTG ACTGAC TGACTG");
 
         validator = new FingerprintValidator(4, 3);
 
@@ -135,6 +136,7 @@ class FingerprintValidatorTest {
         assertNotFingerprint("CCCCAC TGACTG GCTGAC TGACTG ACGGAC TGAGTG");
         assertNotFingerprint("ACTGAC TGACTG ATTTTC TGTCGG ATTGAC CGACTG");
         assertNotFingerprint("ACATAC TGTCTG ATAGAG TGACTG ACTGAG TGACTA");
+        assertNotFingerprint("ACTGAC TGACTG AAAAAC TGACTG ACTGAC TGACTG");
     }
 
     @Test

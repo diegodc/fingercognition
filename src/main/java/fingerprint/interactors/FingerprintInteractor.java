@@ -1,10 +1,10 @@
 package fingerprint.interactors;
 
 import fingerprint.entities.Fingerprint;
+import fingerprint.entities.FingerprintFactory;
 import fingerprint.entities.VerificationStats;
 import fingerprint.helpers.Encoder;
 import fingerprint.persistence.FingerprintRepository;
-import fingerprint.validation.FingerprintValidator;
 
 import java.util.Optional;
 
@@ -15,7 +15,6 @@ import java.util.Optional;
 public class FingerprintInteractor {
 
     private FingerprintRepository repository;
-    private FingerprintValidator validator;
 
     /**
      * Crea un nuevo interactor asociado al repositorio dado.
@@ -24,7 +23,6 @@ public class FingerprintInteractor {
      */
     public FingerprintInteractor(FingerprintRepository repository) {
         this.repository = repository;
-        this.validator = new FingerprintValidator(4, 2);
     }
 
     /**
@@ -56,15 +54,11 @@ public class FingerprintInteractor {
     private Fingerprint getFingerprint(String fingerPrintId, String[] matrix) {
         Optional<Fingerprint> optional = repository.findById(fingerPrintId);
 
-        return optional.orElseGet(() -> buildFingerprint(matrix, fingerPrintId));
-
+        return optional.orElseGet(() -> buildFingerprint(matrix));
     }
 
-    private Fingerprint buildFingerprint(String[] matrix, String fingerPrintId) {
-
-        boolean isValid = validator.isFingerPrint(matrix);
-
-        Fingerprint fingerprint = new Fingerprint(fingerPrintId, isValid);
+    private Fingerprint buildFingerprint(String[] matrix) {
+        Fingerprint fingerprint = FingerprintFactory.newFingerprint(matrix);
 
         repository.save(fingerprint);
 
