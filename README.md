@@ -12,7 +12,8 @@ Se eligió Spring por las facilidades que brinda para crear servicios REST, ya q
 Se eligió MongoDb como base de datos ya que tiene una muy buena performance, y para una aplicación de este estilo, ante la necesidad de persistir una gran cantidad de huellas, una base NoSql como MongoDb tiene la ventaja de poder ser escalable horizontalmente.
 
 ###### JUnit - Mockito
-Utilizadas para los test de unidad. En la carpeta **test-coverage-report** se puede ver el reporte de code coverage.
+Utilizadas para los test de unidad. [Reporte de code coverage](https://rawgit.com/diegodc/fingercognition/master/test-coverage-report/index.html)
+
 
 ___
 
@@ -37,7 +38,7 @@ ___
 En este momento la Api se encuentra hosteada en Heroku.
 **Aviso**: Pasados los 30 minutos sin uso, Heroku detiene el proceso. Este se reinicia al recibir un request. El reinicio puede demorar unos 10/15 segundos.
 
-#### Validacion de Huellas
+#### Validación de Huellas
 
     URL: /fingerPrint
     METODO: POST
@@ -46,7 +47,7 @@ En este momento la Api se encuentra hosteada en Heroku.
             "matrix" : ["ATGCGA","CAGTGC","TTATGT","AGAAGG","CCCCTA","TCACTG"]
         }
 
-#### Obtener Estadisticas de Verificacion
+#### Obtener Estadísticas de Verificación
 
     URL: /stats
     METODO: GET
@@ -61,7 +62,7 @@ ___
 
 ### Instrucciones Build | Deploy:
 
-El despligue recomendado es mediante un container de Docker.
+El despliegue recomendado es mediante un container de Docker.
 
 ##### Requisitos:
 - [Maven](https://maven.apache.org/install.html)
@@ -75,14 +76,14 @@ Descargar o clonar el proyecto.
 Abrir un terminal/consola en el directorio base del proyecto.
 
 #### Paso 3:
-Ejecutar este comando de Maven para compilar la imagen de Docker que contendra la aplicacion.
+Ejecutar este comando de Maven para compilar la imagen de Docker que contendrá la aplicación.
 
     mvn install dockerfile:build
 
 Se creara la imagen **diegodc/fingercognition**
 
 #### Paso 4: 
-Ahora docker-compose se encargara de crear y ejecutar el contenedor de la aplicacion, y tambien el contenedor con la base de datos. Ademas realiza la conexion entre los contenedores.
+Ahora docker-compose se encargara de crear y ejecutar el contenedor de la aplicación, y también el contenedor con la base de datos. Ademas realiza la conexión entre los contenedores.
 
 ##### Api URL: http://localhost:8080
 
