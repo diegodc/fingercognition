@@ -22,7 +22,7 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: huella
 
   fingerprint-service:
-    image: diegodc/fingerprint-validation
+    image: diegodc/fingercognition
     ports:
       - 8080:8080
     links:
