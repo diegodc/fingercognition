@@ -1,0 +1,129 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FingerprintRepositoryImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">rest.persistence</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FingerprintRepositoryImpl (rest.persistence)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FingerprintRepositoryImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FingerprintRepositoryImpl$MockitoMock$309465158</td>
+  </tr>
+  <tr>
+    <td class="name">FingerprintRepositoryImpl$MockitoMock$309465158$auxiliary$d2ifyj8C</td>
+  </tr>
+  <tr>
+    <td class="name">FingerprintRepositoryImpl$MockitoMock$309465158$auxiliary$mErddGJ9</td>
+  </tr>
+  <tr>
+    <td class="name">FingerprintRepositoryImpl$MockitoMock$309465158$auxiliary$VvcX9T5V</td>
+  </tr>
+  <tr>
+    <td class="name">FingerprintRepositoryImpl$MockitoMock$309465158$auxiliary$zU2vyrCh</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package rest.persistence;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import core.fingerprint.entities.Fingerprint;
+<i>4</i>&nbsp;import core.fingerprint.persistence.FingerprintRepository;
+<i>5</i>&nbsp;import org.springframework.data.mongodb.repository.MongoRepository;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * FingerprintRepositoy implementation using Spring Data MongoDb.
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;public interface FingerprintRepositoryImpl extends FingerprintRepository, MongoRepository&lt;Fingerprint, String&gt; {
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    @Override
+<i>13</i>&nbsp;    default long countValidFingerprints() {
+<b class="nc"><i>14</i>&nbsp;        return this.countByIsValid(true);</b>
+<i>15</i>&nbsp;    }
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    @Override
+<i>18</i>&nbsp;    default long countInvalidFingerprints() {
+<b class="nc"><i>19</i>&nbsp;        return this.countByIsValid(false);</b>
+<i>20</i>&nbsp;    }
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    long countByIsValid(boolean isValid);
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-06-26 04:21</div>
+</div>
+</body>
+</html>

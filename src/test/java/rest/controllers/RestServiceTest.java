@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
 import rest.persistence.FingerprintRepositoryImpl;
 
-import java.nio.charset.Charset;
-
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,10 +23,6 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringRunner.class)
 @WebMvcTest(RestController.class)
 public class RestServiceTest {
-
-    private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-            MediaType.APPLICATION_JSON.getSubtype(),
-            Charset.forName("utf8"));
 
     @Autowired
     private MockMvc mockMvc;
@@ -49,19 +43,32 @@ public class RestServiceTest {
     @Test
     public void verificationService() throws Exception {
 
-        String validRequest = "{\"matrix\" : [\"ACTGAC\", \"TAACTA\", \"ACAGAG\", \"TGAATG\", \"ACTGAG\", \"TGACTG\"]}";
-        String invalidRequest = "{\"matrix\" : [\"ACTGAC\", \"TGACTG\", \"ACTGAC\", \"TGACTG\", \"ACTGAC\", \"TGACTG\"]}";
-
+        String validMatrix = "{\"matrix\" : [\"ACTGAC\", \"TAACTA\", \"ACAGAG\", \"TGAATG\", \"ACTGAG\", \"TGACTG\"]}";
+        String invalidMatrix = "{\"matrix\" : [\"ACTGAC\", \"TGACTG\", \"ACTGAC\", \"TGACTG\", \"ACTGAC\", \"TGACTG\"]}";
 
         mockMvc.perform(post("/fingerPrint")
-                .contentType(contentType)
-                .content(validRequest))
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(validMatrix))
                 .andExpect(status().isOk());
 
         mockMvc.perform(post("/fingerPrint")
-                .contentType(contentType)
-                .content(invalidRequest))
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(invalidMatrix))
                 .andExpect(status().isForbidden());
+    }
+
+    @Test
+    public void emptyBodyRequest() throws Exception {
+        mockMvc.perform(post("/fingerPrint"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void invalidRequest() throws Exception {
+        mockMvc.perform(post("/fingerPrint")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content("bad"))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -69,7 +76,7 @@ public class RestServiceTest {
 
         mockMvc.perform(get("/stats"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(contentType))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.count_valid_fingerPrint", is(10)))
                 .andExpect(jsonPath("$.count_not_valid_fingerPrint", is(3)))
                 .andExpect(jsonPath("$.ratio", is(3.3)));

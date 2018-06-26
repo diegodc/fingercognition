@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: FingerprintInteractor</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">core.fingerprint.interactors</a> ]
+</div>
+
+<h1>Coverage Summary for Class: FingerprintInteractor (core.fingerprint.interactors)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FingerprintInteractor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package core.fingerprint.interactors;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import core.fingerprint.entities.Fingerprint;
+<i>4</i>&nbsp;import core.fingerprint.entities.FingerprintFactory;
+<i>5</i>&nbsp;import core.fingerprint.entities.VerificationStats;
+<i>6</i>&nbsp;import core.fingerprint.helpers.Encoder;
+<i>7</i>&nbsp;import core.fingerprint.persistence.FingerprintRepository;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import java.util.Optional;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;/**
+<i>12</i>&nbsp; * Define las funcionalidades de la aplicacion. El interactor separa el core de la aplicacion de
+<i>13</i>&nbsp; * los frameworks utilizados. Facilitando la integracion y testing.
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;public class FingerprintInteractor {
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    private FingerprintRepository repository;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * Crea un nuevo interactor asociado al repositorio dado.
+<i>21</i>&nbsp;     *
+<i>22</i>&nbsp;     * @param repository el repositorio utilizado por este interactor
+<i>23</i>&nbsp;     */
+<b class="fc"><i>24</i>&nbsp;    public FingerprintInteractor(FingerprintRepository repository) {</b>
+<b class="fc"><i>25</i>&nbsp;        this.repository = repository;</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    /**
+<i>29</i>&nbsp;     * Verifica la huella dada analizando su matriz de minucias.
+<i>30</i>&nbsp;     *
+<i>31</i>&nbsp;     * @param matrix la matriz de minucias
+<i>32</i>&nbsp;     * @return true si la huella es valida, false en caso contrario
+<i>33</i>&nbsp;     */
+<i>34</i>&nbsp;    public boolean verifyFingerprint(String[] matrix) {
+<i>35</i>&nbsp;
+<b class="fc"><i>36</i>&nbsp;        if (matrixIsNullOrEmpty(matrix))</b>
+<b class="fc"><i>37</i>&nbsp;            return false;</b>
+<i>38</i>&nbsp;        else
+<b class="fc"><i>39</i>&nbsp;            return verify(matrix);</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    private boolean matrixIsNullOrEmpty(String[] matrix) {
+<b class="fc"><i>43</i>&nbsp;        return matrix == null || matrix.length == 0;</b>
+<i>44</i>&nbsp;    }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    private boolean verify(String[] matrix) {
+<b class="fc"><i>47</i>&nbsp;        String fingerPrintId = Encoder.serializeFingerprintMatrix(matrix);</b>
+<i>48</i>&nbsp;
+<b class="fc"><i>49</i>&nbsp;        Fingerprint fingerprint = getFingerprint(fingerPrintId, matrix);</b>
+<i>50</i>&nbsp;
+<b class="fc"><i>51</i>&nbsp;        return fingerprint.isValid();</b>
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    private Fingerprint getFingerprint(String fingerPrintId, String[] matrix) {
+<b class="fc"><i>55</i>&nbsp;        Optional&lt;Fingerprint&gt; optional = repository.findById(fingerPrintId);</b>
+<i>56</i>&nbsp;
+<b class="fc"><i>57</i>&nbsp;        return optional.orElseGet(() -&gt; buildFingerprint(matrix));</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;    private Fingerprint buildFingerprint(String[] matrix) {
+<b class="fc"><i>61</i>&nbsp;        Fingerprint fingerprint = FingerprintFactory.newFingerprint(matrix);</b>
+<i>62</i>&nbsp;
+<b class="fc"><i>63</i>&nbsp;        repository.save(fingerprint);</b>
+<i>64</i>&nbsp;
+<b class="fc"><i>65</i>&nbsp;        return fingerprint;</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    /**
+<i>69</i>&nbsp;     * Retorna un VerificationStats con los datos de verificacion de huellas.
+<i>70</i>&nbsp;     *
+<i>71</i>&nbsp;     * @return las estadisticas de verificacion
+<i>72</i>&nbsp;     */
+<i>73</i>&nbsp;    public VerificationStats getStats() {
+<b class="fc"><i>74</i>&nbsp;        long validFingerprints = repository.countValidFingerprints();</b>
+<b class="fc"><i>75</i>&nbsp;        long notValidFingerprints = repository.countInvalidFingerprints();</b>
+<i>76</i>&nbsp;
+<b class="fc"><i>77</i>&nbsp;        return new VerificationStats(validFingerprints, notValidFingerprints);</b>
+<i>78</i>&nbsp;    }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2018-06-26 04:21</div>
+</div>
+</body>
+</html>
