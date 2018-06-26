@@ -1,0 +1,3 @@
+spring.data.mongodb:
+  uri: mongodb://necar:huella@mongo:27017
+  database: necar

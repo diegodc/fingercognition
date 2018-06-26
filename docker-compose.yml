@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo:3.6
+    restart: always
+    ports:
+      - 27017:27017
+    command: --smallfiles
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: necar
+      MONGO_INITDB_ROOT_PASSWORD: huella
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: necar
+      ME_CONFIG_MONGODB_ADMINPASSWORD: huella
+
+  fingerprint-service:
+    image: diegodc/fingerprint-validation
+    ports:
+      - 8080:8080
+    links:
+      - mongo
+    entrypoint: "java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"
