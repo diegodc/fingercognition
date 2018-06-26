@@ -1,4 +1,4 @@
-# fingerprint-validation
+# fingercognition
 ### API REST para Validación de Huellas
 
 Fingercognition es un servicio REST implementado en Java
@@ -34,7 +34,8 @@ ___
 
 ### Api URL: https://fingercognition.herokuapp.com/
 
-En este momento la Api se encuentra hosteada en Heroku. **Aviso: Pasados los 30 minutos sin uso, Heroku detiene el proceso. Este se reinicia al recibir un request. El reinicio puede demorar unos 10/15 segundos.**
+En este momento la Api se encuentra hosteada en Heroku.
+**Aviso**: Pasados los 30 minutos sin uso, Heroku detiene el proceso. Este se reinicia al recibir un request. El reinicio puede demorar unos 10/15 segundos.
 
 #### Validacion de Huellas
 
@@ -55,3 +56,50 @@ En este momento la Api se encuentra hosteada en Heroku. **Aviso: Pasados los 30 
         "count_not_valid_fingerPrint" : 100.
         "ratio": 0.4
      }
+
+___
+
+### Instrucciones Build | Deploy:
+
+El despligue recomendado es mediante un container de Docker.
+
+##### Requisitos:
+- [Maven](https://maven.apache.org/install.html)
+- [Docker](https://docs.docker.com/install/)
+- [docker-compose](https://docs.docker.com/compose/install/)
+
+#### Paso 1:
+Descargar o clonar el proyecto.
+
+#### Paso 2:
+Abrir un terminal/consola en el directorio base del proyecto.
+
+#### Paso 3:
+Ejecutar este comando de Maven para compilar la imagen de Docker que contendra la aplicacion.
+
+    mvn install dockerfile:build
+
+Se creara la imagen **diegodc/fingercognition**
+
+#### Paso 4: 
+Ahora docker-compose se encargara de crear y ejecutar el contenedor de la aplicacion, y tambien el contenedor con la base de datos. Ademas realiza la conexion entre los contenedores.
+
+##### Api URL: http://localhost:8080
+
+- Crear los servicios y ejecutar
+
+      docker-compose up -d
+
+Se incluyo el servicio **mongo-express**, un cliente web para MongoDb, se puede acceder mediante http://localhost:8081
+
+- Detener todos los servicios (sin eliminar los contenedores)
+
+      docker-compose stop
+    
+- Iniciar los servicios
+
+      docker-compose start
+    
+- Detener los servicios y eliminar los contenedores
+
+      docker-compose down
